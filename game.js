@@ -10,7 +10,7 @@ const spanTime = document.getElementById("time");
 const spanRecord = document.getElementById("record");
 const pResult = document.getElementById("result");  
 
-let canvasSize, elementSize, level = 0, lives = 3, timeStart, timePlayer, timeIntervalId, victory= false;
+let canvasSize, elementSize, level = 0, lives = 3, timeStart, timePlayer, timeIntervalId, victory= false, failure = false;
 
 const playerPosition = {
   x: undefined,
@@ -119,6 +119,7 @@ btnUp.addEventListener("click", moveUp);
 btnDown.addEventListener("click", moveDown);
 btnLeft.addEventListener("click", moveLeft);
 btnRight.addEventListener("click", moveRight);
+btnAgain.addEventListener("click", restartGame);
 window.addEventListener("keydown", (event) => {
   switch(event.key.toLowerCase()) {
     case "arrowup":     moveUp();
@@ -160,6 +161,10 @@ function movePlayer() {
   if(victory) {
     game.fillText(emojis['HAPPY'], playerPosition.x, playerPosition.y);
   }
+  if(failure) {
+    game.fillText(emojis['SICK'], playerPosition.x, playerPosition.y);
+    pResult.innerText = "Aviso: 📢 GAME OVER";
+  }
 }
 
 function levelUp() {
@@ -180,7 +185,6 @@ function gameWin() {
       localStorage.setItem("record", playerTime);
       pResult.innerText = "Aviso: 📢 Record superado! 😃";
     } else {
-      console.log("");
       pResult.innerText = "Aviso: 📢 Record no superado. 😟";
     }
   } else {
@@ -207,19 +211,19 @@ function showRecord() {
 function formatTime(milisegundos) {
   let segundos = Math.floor(milisegundos / 1000);
   const minutos = Math.floor(segundos / 60);
-  const horas = Math.floor(minutos / 60);
   segundos = segundos >= 60 ? Math.floor(segundos - (60 * minutos)) : segundos;
-  return `${horas} horas ${minutos} minutos ${segundos} segundos`;
+  return `${minutos} minutos ${segundos} segundos`;
 }
 
 function gameLose() {
   lives--;
   if (lives == 0) {
-    level = 0;
-    lives = 3;
-    timeStart = undefined;
-    explotionsPosition = [];
+    //level = 0;
+    //lives = 3;
+    //timeStart = undefined;
+    //explotionsPosition = [];
     clearInterval(timeIntervalId);
+    failure = true;
   } 
   playerPosition.x = undefined;
   playerPosition.y = undefined;
@@ -228,6 +232,9 @@ function gameLose() {
 
 function moveUp() {
   console.log({playerPosition,elementSize,canvasSize});
+  if(failure) {
+    return;
+  }
   if(parseFloat((playerPosition.y - elementSize).toFixed(2))<= 0) {
     return;
   }
@@ -237,6 +244,9 @@ function moveUp() {
 
 function moveDown() {
   console.log({playerPosition,elementSize,canvasSize});
+  if(failure) {
+    return;
+  }
   if(parseFloat((canvasSize - playerPosition.y).toFixed(2)) < elementSize) {
     return;
   }
@@ -246,6 +256,9 @@ function moveDown() {
 
 function moveLeft() {
   console.log({playerPosition,elementSize,canvasSize});
+  if(failure) {
+    return;
+  }
   if(playerPosition.x <= elementSize) {
     return;
   }
@@ -255,6 +268,9 @@ function moveLeft() {
 
 function moveRight() {
   console.log({playerPosition,elementSize,canvasSize});
+  if(failure) {
+    return;
+  }
   if(parseFloat((canvasSize - playerPosition.x).toFixed(2)) < elementSize) {
     return;
   }
@@ -262,4 +278,16 @@ function moveRight() {
   startGame(); 
 }
 
-
+function restartGame() {
+  explotionsPosition = [];
+  enemiesPosition = [];
+  lives = 3;
+  level = 0;
+  timeStart = undefined;
+  victory= false; 
+  failure = false;
+  pResult.innerText = "";
+  giftPosition.x = undefined;
+  giftPosition.y = undefined;
+  setCanvasSize();
+}
