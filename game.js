@@ -286,8 +286,11 @@ function restartGame() {
   timeStart = undefined;
   victory= false; 
   failure = false;
+  timeIntervalId = undefined;
   pResult.innerText = "";
   giftPosition.x = undefined;
   giftPosition.y = undefined;
+  playerPosition.x= undefined;
+  playerPosition.y= undefined;
   setCanvasSize();
 }
