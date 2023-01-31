@@ -78,3 +78,15 @@ maps.push(`
   XXX-XXXXXX
   XXXOXXXXXX
 `);
+maps.push(`
+  XXXXXXXXXO
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  XXXXXXXXX-
+  I---------
+`);

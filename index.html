@@ -4,29 +4,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles.css" type="text/css">
-  <title>Platzi - jueguito online</title>
+  <title>Juego-JavaScript</title>
+  <link rel="stylesheet" href="./index.css" type="text/css">
 </head>
 <body>
-  <div class="game-container">
-    <canvas id="game"></canvas>
-
-    <div class="btns">
-      <button id="up">⬆</button>
-      <button id="left">⬅</button>
-      <button id="right">➡</button>
-      <button id="down">⬇</button>
-      <button id="again">🔄</button>
-    </div>
-
-    <div class="messages">
-      <p>Vidas: <span id="lives"></span></p>
-      <p>Tiempo: ⏱ <span id="time"></span></p>
-      <p>Record: 🏆 <span id="record"></span></p>
-      <p id="result"></p>
-    </div>
-  </div>
-  <script src="./maps.js"></script>
-  <script src="./game.js"></script>
+  <section class="main-container">
+    <article class="container">
+      <h1>Juego - JavaScript</h1>
+      <p>&#161;Ayuda a Pepito a encontar un baño limpio!</p>
+      <p class="emojis-container">
+        <span>🤢</span> 
+        <span>💣💣💣</span>
+        <span>🚽</span>
+      </p>
+      <ul class="lista">
+        <li>Tienes 3 oportunidades &nbsp;<span>❤❤❤</span></li>
+        <li>Puedes reiniciar el juego  &nbsp;<span>🔄</span></li>
+        <li>Establece un tiempo record   &nbsp;<span>⏱</span></li>
+      </ul>
+      <p class="enlace-container"><a href="./juego.html">Juega ya</a></p>
+    </article>
+  </section>
 </body>
 </html>
